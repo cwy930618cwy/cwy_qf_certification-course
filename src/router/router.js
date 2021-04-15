@@ -31,6 +31,30 @@ const routes = [
           title: '认证管理'
         },
         component: () => import(/* webpackChunkName: "coursecer" */ '../views/authentication/certification.vue')
+      },
+      {
+        path: '/basicsCourse',
+        name: 'basicsCourse',
+        meta: {
+          title: '课程基础信息'
+        },
+        component: () => import(/* webpackChunkName: "coursecer" */ '../views/authentication/editCourse/basicsCourse.vue')
+      },
+      {
+        path: '/outlineCourse',
+        name: 'outlineCourse',
+        meta: {
+          title: '课程大纲'
+        },
+        component: () => import(/* webpackChunkName: "coursecer" */ '../views/authentication/editCourse/outlineCourse.vue')
+      },
+      {
+        path: '/warehouseCourse',
+        name: 'warehouseCourse',
+        meta: {
+          title: '课程题库'
+        },
+        component: () => import(/* webpackChunkName: "coursecer" */ '../views/authentication/editCourse/warehouseCourse.vue')
       }
     ]
   },

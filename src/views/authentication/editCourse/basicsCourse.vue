@@ -1,92 +1,90 @@
 <template>
-	<div class="authentication">
+  <div>
+    <div class="authentication">
 		<el-breadcrumb separator="/">
 			<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-			<el-breadcrumb-item><a href="/">认证课管理</a></el-breadcrumb-item>
-			<el-breadcrumb-item>添加课程</el-breadcrumb-item>
+			<el-breadcrumb-item><a href="/authentication">认证课管理</a></el-breadcrumb-item>
+			<el-breadcrumb-item>课程基础信息</el-breadcrumb-item>
 		</el-breadcrumb>
 		<div class="sections">
-			<div class="step">
-				<el-steps :active="1">
-					<el-step title="课程基础信息" icon="el-icon-edit"></el-step>
-					<el-step title="课程大纲" icon="el-icon-upload"></el-step>
-					<el-step title="课程题库" icon="el-icon-picture"></el-step>
-				</el-steps>
-			</div>
-			<el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
-				<el-form-item label="课程名称" prop="courseNmae">
-					<el-input v-model="temp.courseNmae" />
-				</el-form-item>
-				<el-form-item label="认证类型" prop="courseType">
-					<el-select v-model="temp.courseType" class="filter-item" placeholder="请输入认证类型">
-						<el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
-					</el-select>
-				</el-form-item>
-				<el-form-item label="学费" prop="coursePrice">
-					<el-input v-model="temp.coursePrice" />
-				</el-form-item>
-				<el-form-item label="讲师" prop="courseTeacher">
-					<el-select v-model="temp.courseTeacher" class="filter-item" placeholder="请输入讲师">
-						<el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
-					</el-select>
-				</el-form-item>
-				<el-form-item label="助教" prop="courseHelp">
-					<el-select v-model="temp.courseHelp" class="filter-item" placeholder="请输入助教">
-						<el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
-					</el-select>
-				</el-form-item>
-				<el-form-item label="班主任" prop="courseGuide">
-					<el-select v-model="temp.courseGuide" class="filter-item" placeholder="请输入班主任">
-						<el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
-					</el-select>
-				</el-form-item>
-				<el-form-item label="QQ群" prop="courseGroup">
-					<el-input v-model="temp.courseGroup" />
-				</el-form-item>
-				<el-form-item label="课程封面" prop="coursePic">
+			<div class="contain">
+        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
+          <el-form-item label="课程名称" prop="courseNmae">
+            <el-input v-model="temp.courseNmae" />
+          </el-form-item>
+          <el-form-item label="认证类型" prop="courseType">
+            <el-select v-model="temp.courseType" class="filter-item" placeholder="请输入认证类型">
+              <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="学费" prop="coursePrice">
+            <el-input v-model="temp.coursePrice" />
+          </el-form-item>
+          <el-form-item label="讲师" prop="courseTeacher">
+            <el-select v-model="temp.courseTeacher" class="filter-item" placeholder="请输入讲师">
+              <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="助教" prop="courseHelp">
+            <el-select v-model="temp.courseHelp" class="filter-item" placeholder="请输入助教">
+              <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="班主任" prop="courseGuide">
+            <el-select v-model="temp.courseGuide" class="filter-item" placeholder="请输入班主任">
+              <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="QQ群" prop="courseGroup">
+            <el-input v-model="temp.courseGroup" />
+          </el-form-item>
+          <el-form-item label="课程封面" prop="coursePic">
 
-					<div class="upload_box">
-						<div
-							class="upload_input"
-							:style="{
-								width: temp.coursePic ? '440px' : '160px',
-								height: temp.coursePic ? '140px' : '210px',
-							}"
-						>
-							<qiniuUpload
-								name="coursePic"
-								@uploadPic="upLoadDetailUrl"
-							></qiniuUpload>
-						</div>
-						<img
-							v-if="temp.coursePic"
-							:src="temp.coursePic"
-							class="upload-detail-img"
-							alt=""
-						/>
-						<div v-else class="upload-add grey-light-bg cursor">
-							+
-						</div>
-						<span
-							>支持png/jpg/jpeg/webp格式文件，且大小不超过2m，建议尺寸：1200*380px</span
-						>
-					</div>
+            <div class="upload_box">
+              <div
+                class="upload_input"
+                :style="{
+                  width: temp.coursePic ? '440px' : '160px',
+                  height: temp.coursePic ? '140px' : '210px',
+                }"
+              >
+                <qiniuUpload
+                  name="coursePic"
+                  @uploadPic="upLoadDetailUrl"
+                ></qiniuUpload>
+              </div>
+              <img
+                v-if="temp.coursePic"
+                :src="temp.coursePic"
+                class="upload-detail-img"
+                alt=""
+              />
+              <div v-else class="upload-add grey-light-bg cursor">
+                +
+              </div>
+              <span
+                >支持png/jpg/jpeg/webp格式文件，且大小不超过2m，建议尺寸：1200*380px</span
+              >
+            </div>
 
-				</el-form-item>
-				<el-form-item label="课程简介" prop="courseIntro">
-					<el-input v-model="temp.courseIntro" />
-				</el-form-item>
-			</el-form>
-			<div class="but">
+          </el-form-item>
+          <el-form-item label="课程简介" prop="courseIntro">
+            <el-input v-model="temp.courseIntro" />
+          </el-form-item>
+        </el-form>
+      </div>
+			<div class="footer">
 				<el-button @click="cancelForm('temp')">取消</el-button>
         <el-button
+          @click="stepSave()"
           type="primary"
           >保存</el-button
         >
-				<el-button @click="cancelForm('temp')">下一步</el-button>
+				<el-button type="primary" @click="stepContinu()">保存并跳转课程大纲</el-button>
 			</div>
 		</div>
 	</div>
+  </div>
 </template>
 <script>
 // import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
@@ -238,20 +236,6 @@ export default {
       })
       row.status = status
     },
-    sortChange(data) {
-      const { prop, order } = data
-      if (prop === 'id') {
-        this.sortByID(order)
-      }
-    },
-    sortByID(order) {
-      if (order === 'ascending') {
-        this.listQuery.sort = '+id'
-      } else {
-        this.listQuery.sort = '-id'
-      }
-      this.handleFilter()
-    },
     resetTemp() {
       this.temp = {
         id: undefined,
@@ -326,44 +310,6 @@ export default {
       })
       this.list.splice(index, 1)
     },
-    handleFetchPv(pv) {
-      // fetchPv(pv).then(response => {
-      //   this.pvData = response.data.pvData
-      //   this.dialogPvVisible = true
-      // })
-    },
-    handleDownload() {
-      this.downloadLoading = true
-      // import('@/vendor/Export2Excel').then(excel => {
-      //   const tHeader = ['timestamp', 'title', 'type', 'importance', 'status']
-      //   const filterVal = ['timestamp', 'title', 'type', 'importance', 'status']
-      //   const data = this.formatJson(filterVal)
-      //   excel.export_json_to_excel({
-      //     header: tHeader,
-      //     data,
-      //     filename: 'table-list'
-      //   })
-      //   this.downloadLoading = false
-      // })
-    },
-    formatJson(filterVal) {
-      return this.list.map(v => filterVal.map(j => {
-        if (j === 'timestamp') {
-          return parseTime(v[j])
-        } else {
-          return v[j]
-        }
-      }))
-    },
-    getSortClass: function(key) {
-      const sort = this.listQuery.sort
-      return sort === `+${key}` ? 'ascending' : 'descending'
-    },
-
-    // 发布状态按钮变更
-    handlePublich(){
-
-    },
 
 		// 图片上传
 		upLoadDetailUrl(url) {
@@ -376,9 +322,15 @@ export default {
       // });
     },
 
-		cancelForm(){
-
-		}
+    cancelForm(){
+       this.$router.replace({ path: '/authentication' })
+		},
+    stepContinu(){
+      this.$router.push({ path:'/outlineCourse', query: { id: 1} })
+    },
+    stepSave(){
+      this.$router.replace({ path: '/authentication' })
+    }
   }
 }
 </script>
@@ -387,13 +339,35 @@ export default {
 .sections {
   margin: 18px 0;
   background: #fff;
-  padding: 26px;
+  // padding: 26px;
   position: absolute;
   top: 41px;
   bottom: 0px;
   right: 0;
   left: 0;
   overflow: scroll;
+  .step{
+    background: white;
+    height: 80px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /deep/ .el-steps{
+      width: 80%;
+    }
+  }
+  .contain{
+    margin: 20px 0;
+    background: white;
+    padding: 20px 0;
+    border-radius: 10px;
+    min-height: 600px;
+  }
+  .footer{
+    display: flex;
+    justify-content: center;
+  }
 }
 .upload_box {
   display: flex;

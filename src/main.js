@@ -9,6 +9,7 @@ import '@/assets/css/base.less'
 import * as VueCookies from 'vue-cookies'
 import api from './api'
 import { log } from '@/utils/public'
+import '../styles/index.scss' // global css
 Vue.prototype.$api = api
 Vue.prototype.$log = log
 // import "@/assets/css/element_theme.scss";
